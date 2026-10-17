@@ -1,0 +1,19 @@
+{
+  // Sanitized example: copy into ~/.pi/agent/modes.json (or ./.pi/modes.json) and
+  // replace provider/modelId with your own registry names. The API keys themselves
+  // live in your pi provider registry (models.json / provider config), never here.
+  "modes": {
+    "advisor": {
+      "provider": "olo",               // primary upstream for the advisor
+      "modelId": "intern/glm-5.3",
+      "thinkingLevel": "high",
+      // Cross-upstream fallback chain: if the primary model is unreachable, the
+      // advisor walks this list in order, degrading instead of stopping. Each
+      // entry may use a different provider (different key + endpoint).
+      "fallbackModels": [
+        { "provider": "tuan",      "modelId": "Tuan" },
+        { "provider": "workbuddy", "modelId": "hy3" }
+      ]
+    }
+  }
+}
