@@ -53,8 +53,28 @@ pi-omplike-advisor/
   package.json  README.md
   extensions/advisor.ts     # the extension
   extensions/lib/mode-utils.ts
-modes.example.json          # sanitized advisor config, incl. the fallback chain
+config/                     # the runtime config actually in use (see below)
+  modes.json                # real advisor mode spec, incl. the fallback chain
+  system-prompts/advisor.md # custom advisor system prompt (replaces the bundled one)
+modes.example.json          # sanitized template, incl. the fallback chain
 ```
+
+## Runtime config (`config/`)
+
+The two packages run against config the extension reads at startup. It is kept here so a
+full snapshot can be restored along with the code (only the code is in the packages; the
+config lives outside them).
+
+- `config/modes.json` → the advisor mode spec. Copied to `~/.pi/agent/modes.json` (or
+  `./.pi/modes.json`). The fallback chain under `modes.advisor.fallbackModels` is what the
+  advisor walks when the primary model is unreachable.
+- `config/system-prompts/advisor.md` → the custom advisor system prompt. Copied to
+  `~/.pi/agent/system-prompts/advisor.md`; if present it *replaces* the bundled prompt
+  wholesale. It also carries the former `WATCHDOG.md` attention block (which the extension
+  would otherwise append from `<cwd>/WATCHDOG.md`), so this snapshot is self-consistent.
+
+> `modes.example.json` at the root is a placeholder template (no real provider IDs); use
+> `config/modes.json` as the working copy.
 
 ## Install
 

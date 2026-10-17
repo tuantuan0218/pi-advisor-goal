@@ -1,0 +1,19 @@
+{
+  "modes": {
+    "advisor": {
+      "provider": "olo",
+      "modelId": "intern/glm-5.3",
+      "thinkingLevel": "high",
+      "fallbackModels": [
+        {
+          "provider": "tuan",
+          "modelId": "Tuan"
+        },
+        {
+          "provider": "workbuddy",
+          "modelId": "hy3"
+        }
+      ]
+    }
+  }
+}
